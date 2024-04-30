@@ -9,7 +9,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         // conectar al master
         Debug.Log("Conectando");
-        //MenuManager.Instance.OpenMenuName("Loading"); (paso 60)
+        MenuManager.Instance.OpenMenuName("Loading"); //(paso 60)
         PhotonNetwork.ConnectUsingSettings();
     }
     public override void OnConnectedToMaster()
@@ -23,7 +23,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         //borran la base
         // base.OnJoinedLobby();
-        //MenuManager.Instance.OpenMenuName("Home"); (paso 61)
+        MenuManager.Instance.OpenMenuName("Home"); //(paso 61)
         Debug.Log("Conectado al lobby ");
     }
 
