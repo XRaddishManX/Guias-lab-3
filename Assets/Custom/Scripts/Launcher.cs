@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
+
+    [SerializeField] TMP_InputField _roomNameInputfield;
+    [SerializeField] TMP_InputField _roomName;
+    [SerializeField] TMP_Text _errorMessage;
+
     void Start()
     {
         // conectar al master
@@ -25,6 +31,42 @@ public class Launcher : MonoBehaviourPunCallbacks
         // base.OnJoinedLobby();
         MenuManager.Instance.OpenMenuName("Home"); //(paso 61)
         Debug.Log("Conectado al lobby ");
+    }
+
+    public void CreateRoom()
+    {
+        if (string.IsNullOrEmpty(_roomNameInputfield.text))
+        {
+            return;
+        }
+
+        PhotonNetwork.CreateRoom(_roomNameInputfield.text);
+
+        MenuManager.Instance.OpenMenuName("Loading");
+
+    }
+
+    public override void OnJoinedRoom()
+    {
+        MenuManager.Instance.OpenMenuName("Room");
+        _roomName.text = PhotonNetwork.CurrentRoom.Name;
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        _errorMessage.text = "Error al crear la sala " + message;
+        MenuManager.Instance.OpenMenuName("Error");
+    }
+
+    public void Leaveroom()
+    {
+        PhotonNetwork.LeaveRoom();
+        MenuManager.Instance.OpenMenuName("Home");
+    }
+
+    public override void OnLeftRoom()
+    {
+        MenuManager.Instance.OpenMenuName("Home");
     }
 
 }
