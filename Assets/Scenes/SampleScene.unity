@@ -1326,9 +1326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16588499722616e43b6773d71553e4fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomNameInputfield: {fileID: 0}
-  _roomName: {fileID: 0}
-  _errorMessage: {fileID: 0}
+  _roomNameInputfield: {fileID: 1863647244}
+  _roomName: {fileID: 961185387}
+  _errorMessage: {fileID: 1949389075}
 --- !u!114 &950009054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2073,7 +2073,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1303658860}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 950009053}
+        m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
+        m_MethodName: CreateRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1303658860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,7 +2206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1441850682}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 950009058}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 882446322}
+          m_ObjectArgumentAssemblyTypeName: MenuVisibility, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1441850682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2249,7 +2273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1466376544
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2367,7 +2391,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1685326749}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 950009053}
+        m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
+        m_MethodName: Leaveroom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1685326749
 MonoBehaviour:
   m_ObjectHideFlags: 0

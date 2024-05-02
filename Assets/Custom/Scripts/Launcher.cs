@@ -8,7 +8,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 {
 
     [SerializeField] TMP_InputField _roomNameInputfield;
-    [SerializeField] TMP_InputField _roomName;
+    [SerializeField] TMP_Text _roomName;
     [SerializeField] TMP_Text _errorMessage;
 
     void Start()
