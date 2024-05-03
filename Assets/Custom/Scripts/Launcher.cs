@@ -13,7 +13,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text _errorMessage;
     [SerializeField] Transform roomListContent;
     [SerializeField] GameObject roomItemPrefab;
+    public static Launcher Instance;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         // conectar al master
@@ -60,7 +65,11 @@ public class Launcher : MonoBehaviourPunCallbacks
         _errorMessage.text = "Error al crear la sala " + message;
         MenuManager.Instance.OpenMenuName("Error");
     }
-
+    public void JoinRoom(RoomInfo _info)
+    {
+        PhotonNetwork.JoinRoom(_info.Name);
+        MenuManager.Instance.OpenMenuName("Loading");
+    }
     public void Leaveroom()
     {
         PhotonNetwork.LeaveRoom();
@@ -74,7 +83,23 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        // nos brinda informacion de las salas que se han creado
+        foreach (Transform transfo in roomListContent)
+        {
+            //destruimos prefabs de todas las salas anteriores para
+            //cargar la nueva lista de salas
+            Destroy(transfo.gameObject);
+        }
+
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            if (roomList[i].RemovedFromList)
+            { continue; }
+            // Creamos un prefab por cada sala que exista
+            //Se Agrega la informacion de la sala
+            // LLamamos Setup para que agrege las salas existentes
+            Instantiate(roomItemPrefab,
+           roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+        }
     }
 
 }
