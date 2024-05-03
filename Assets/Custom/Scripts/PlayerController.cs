@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
     public Transform cameraTransform;
     public float cameraSpeed = 2f;
     public Transform cameraCapsule;
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     private Vector2 moveInput;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions.FindAction("Move");
         cameraMoveAction = playerInput.actions.FindAction("Look");
