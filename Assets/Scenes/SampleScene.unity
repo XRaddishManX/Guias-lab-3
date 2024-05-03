@@ -1432,6 +1432,8 @@ MonoBehaviour:
   _roomNameInputfield: {fileID: 1863647244}
   _roomName: {fileID: 961185387}
   _errorMessage: {fileID: 1949389075}
+  roomListContent: {fileID: 0}
+  roomItemPrefab: {fileID: 0}
 --- !u!114 &950009054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1842,7 +1844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -50.000122}
+  m_AnchoredPosition: {x: 0, y: -50.000122}
   m_SizeDelta: {x: -100, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1080374538

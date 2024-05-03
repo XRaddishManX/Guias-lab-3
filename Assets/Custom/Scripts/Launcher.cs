@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using Photon.Realtime;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -10,6 +11,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] TMP_InputField _roomNameInputfield;
     [SerializeField] TMP_Text _roomName;
     [SerializeField] TMP_Text _errorMessage;
+    [SerializeField] Transform roomListContent;
+    [SerializeField] GameObject roomItemPrefab;
 
     void Start()
     {
@@ -67,6 +70,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         MenuManager.Instance.OpenMenuName("Home");
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        // nos brinda informacion de las salas que se han creado
     }
 
 }
