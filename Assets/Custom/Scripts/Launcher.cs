@@ -17,6 +17,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public static Launcher Instance;
     [SerializeField] Transform PlayerListContent;
     [SerializeField] GameObject PlayerItemPrefab;
+    [SerializeField] GameObject BotonStart;
 
     private void Awake()
     {
@@ -24,23 +25,19 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     void Start()
     {
-        // conectar al master
         Debug.Log("Conectando");
-        MenuManager.Instance.OpenMenuName("Loading"); //(paso 60)
+        MenuManager.Instance.OpenMenuName("Loading");
         PhotonNetwork.ConnectUsingSettings();
+        
     }
     public override void OnConnectedToMaster()
     {
-        //borran la siguiente linea es el comportamiento base del metodo
-        // base.OnConnectedToMaster();
         Debug.Log("Conectado");
         PhotonNetwork.JoinLobby();
     }
     public override void OnJoinedLobby()
     {
-        //borran la base
-        // base.OnJoinedLobby();
-        MenuManager.Instance.OpenMenuName("Home"); //(paso 61)
+        MenuManager.Instance.OpenMenuName("Home");
         Debug.Log("Conectado al lobby ");
         PhotonNetwork.NickName = "player" + Random.Range
         (0, 1000).ToString("0000");
@@ -65,7 +62,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenuName("Room");
         _roomName.text = PhotonNetwork.CurrentRoom.Name;
         foreach (Transform playerT in PlayerListContent)
-        { Destroy(playerT.gameObject); }
+        {
+            Destroy(playerT.gameObject);
+        }
 
         Player[] players = PhotonNetwork.PlayerList;
 
@@ -74,7 +73,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             Instantiate(PlayerItemPrefab,
            PlayerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
-
+        BotonStart.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -102,8 +101,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         foreach (Transform transfo in roomListContent)
         {
-            //destruimos prefabs de todas las salas anteriores para
-            //cargar la nueva lista de salas
             Destroy(transfo.gameObject);
         }
 
@@ -111,9 +108,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             if (roomList[i].RemovedFromList)
             { continue; }
-            // Creamos un prefab por cada sala que exista
-            //Se Agrega la informacion de la sala
-            // LLamamos Setup para que agrege las salas existentes
             Instantiate(roomItemPrefab,
            roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
         }
@@ -124,5 +118,15 @@ public class Launcher : MonoBehaviourPunCallbacks
         Instantiate(PlayerItemPrefab,
        PlayerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
     }
+
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel(1);
+    }
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        BotonStart.SetActive(PhotonNetwork.IsMasterClient);
+    }
+
 
 }
